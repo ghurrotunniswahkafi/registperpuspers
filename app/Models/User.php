@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +45,45 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Check if user is admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if user is petinggi
+     */
+    public function isPetinggi(): bool
+    {
+        return $this->role === 'petinggi';
+    }
+
+    /**
+     * Check if user is calon_member
+     */
+    public function isCalon(): bool
+    {
+        return $this->role === 'calon_member';
+    }
+
+    /**
+     * Check if user can access Filament
+     */
+    public function canAccessFilament(): bool
+    {
+        return $this->isAdmin() || $this->isPetinggi();
+    }
+
+    /**
+     * Check if user is read-only (petinggi)
+     */
+    public function isReadOnly(): bool
+    {
+        return $this->isPetinggi();
     }
 }
