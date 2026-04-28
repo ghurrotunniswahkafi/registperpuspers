@@ -23,27 +23,37 @@
     <body class="font-sans antialiased">
         <div class="page">
             <div class="topbar">
-                <div class="navbar-brand">
-                    <img src="{{ asset('image/logo.png') }}" alt="Logo" class="navbar-logo">
-                    <div class="navbar-text">
-                        <span class="navbar-title">PERPUSTAKAAN</span>
-                        <span class="navbar-subtitle">MONUMEN PERS NASIONAL</span>
+                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                    <button id="sidebar-toggle" class="sidebar-toggle" style="display: none; background: none; border: none; color: #333; cursor: pointer; font-size: 24px;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="navbar-brand">
+                        <img src="{{ asset('image/logo.png') }}" alt="Logo" class="navbar-logo">
+                        <div class="navbar-text">
+                            <span class="navbar-title">PERPUSTAKAAN</span>
+                            <span class="navbar-subtitle">MONUMEN PERS NASIONAL</span>
+                        </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: inline-block; margin: 0;">
-                    @csrf
-                    <button type="submit" class="logout-link" style="background: none; border: none; cursor: pointer; padding: 10px 60px; font-size: inherit; color: inherit; font-weight: inherit;">
-                        LOGOUT
-                    </button>
-                </form>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 0 15px;">
+                    <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: inline-block; margin: 0;">
+                        @csrf
+                        <button type="submit" class="logout-btn" style="background-color: ##004391; border: none; cursor: pointer; padding: 10px 20px; font-size: 14px; color: #ffffff; font-weight: 600; border-radius: 5px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#004391'" onmouseout="this.style.backgroundColor='#2a15c7'">
+                            <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> LOGOUT
+                        </button>
+                    </form>
+                </div>
             </div>
+
+            <!-- SIDEBAR OVERLAY -->
+            <div id="sidebar-overlay" class="sidebar-overlay" style="display: none;"></div>
 
             <div class="container">
 
                 <!-- SIDEBAR -->
-                <div class="sidebar">
-                    <div class="profile">
-                        <div>👤</div>
+                <div class="sidebar" id="sidebar">
+                    <div class="profile" style="display: flex; align-items: center; gap: 10px;">
+                        <img src="{{ asset('image/Profile.png') }}" alt="Profile" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,0,0,0.1);">
                         <div>{{ auth()->user()->name ?? 'PENGGUNA' }}</div>
                     </div>
 
@@ -61,5 +71,56 @@
 
             </div>
         </div>
+
+        <script>
+            // Sidebar Toggle Functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const sidebarToggle = document.getElementById('sidebar-toggle');
+                const sidebar = document.getElementById('sidebar');
+                const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+                // Show toggle button on mobile
+                function updateToggleButtonVisibility() {
+                    if (window.innerWidth <= 768) {
+                        sidebarToggle.style.display = 'block';
+                    } else {
+                        sidebarToggle.style.display = 'none';
+                        sidebar.classList.remove('active');
+                        sidebarOverlay.style.display = 'none';
+                    }
+                }
+
+                // Initial check
+                updateToggleButtonVisibility();
+
+                // Toggle sidebar on button click
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    if (sidebar.classList.contains('active')) {
+                        sidebarOverlay.style.display = 'block';
+                    } else {
+                        sidebarOverlay.style.display = 'none';
+                    }
+                });
+
+                // Close sidebar when overlay is clicked
+                sidebarOverlay.addEventListener('click', function() {
+                    sidebar.classList.remove('active');
+                    sidebarOverlay.style.display = 'none';
+                });
+
+                // Close sidebar when a menu item is clicked
+                const menuLinks = sidebar.querySelectorAll('.menu a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        sidebar.classList.remove('active');
+                        sidebarOverlay.style.display = 'none';
+                    });
+                });
+
+                // Update on window resize
+                window.addEventListener('resize', updateToggleButtonVisibility);
+            });
+        </script>
     </body>
 </html>

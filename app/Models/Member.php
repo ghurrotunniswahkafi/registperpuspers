@@ -23,7 +23,6 @@ class Member extends Model
     'status',
     'pengesahan_nama',
     'pengesahan_jabatan',
-    'pengesahan_no_hp',
     'pengesahan_kenal'
 ];
 

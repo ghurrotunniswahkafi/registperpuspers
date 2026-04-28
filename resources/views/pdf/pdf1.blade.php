@@ -169,8 +169,8 @@
                     <td>: {{ $member->pengesahan_jabatan ?? '-' }}</td>
                 </tr>
                 <tr>
-                    <td>No. Telp/HP</td>
-                    <td>: {{ $member->pengesahan_no_hp ?? '-' }}</td>
+                    <td>No. Telepon/HP</td>
+                    <td>:</td>
                 </tr>
             </table>
             <div class="pengesahan-paragraph">

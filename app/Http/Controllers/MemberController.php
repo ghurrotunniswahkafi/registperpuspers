@@ -68,15 +68,19 @@ class MemberController extends Controller
             'no_identitas' => 'required|string|max:255',
             'asal_alamat' => 'required|string|max:255',
             'tempat' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'required|date|before:today',
             'alamat' => 'required|string',
-            'no_hp' => 'required|string|max:50',
+            'no_hp' => 'required|string|min:12|max:12',
             'email' => 'required|email|max:255',
             'sosmed' => 'nullable|string|max:255',
             'instansi' => 'nullable|string|max:255',
             'alamat_instansi' => 'nullable|string',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:5120',
             'ktp' => 'required|image|mimes:jpg,jpeg,png|max:5120',
+        ], [
+            'tanggal_lahir.before' => 'Tanggal lahir harus di masa lalu, bukan masa depan.',
+            'no_hp.min' => 'Nomor HP harus 12 digit.',
+            'no_hp.max' => 'Nomor HP harus 12 digit.',
         ]);
 
         // Validasi tambahan untuk pengesahan jika asal_alamat = Lainnya
@@ -84,12 +88,10 @@ class MemberController extends Controller
             $request->validate([
                 'pengesahan_nama' => 'required|string|max:255',
                 'pengesahan_jabatan' => 'required|string|max:255',
-                'pengesahan_no_hp' => 'required|string|max:50',
                 'pengesahan_kenal' => 'required|boolean',
             ]);
             $data['pengesahan_nama'] = $request->pengesahan_nama;
             $data['pengesahan_jabatan'] = $request->pengesahan_jabatan;
-            $data['pengesahan_no_hp'] = $request->pengesahan_no_hp;
             $data['pengesahan_kenal'] = $request->pengesahan_kenal ? true : false;
         }
 

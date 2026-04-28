@@ -2,28 +2,7 @@
 
 @section('content')
 
-<div class="status-container">
-    <!-- Header Section -->
-    <div class="status-card-main">
-        <div class="status-header">
-            <h1 class="status-title">Status Pengajuan Pendaftaran</h1>
-            <p class="status-subtitle">Pantau progres pengajuan keanggotaan Anda di sini</p>
-        </div>
 
-        <!-- Current Status Display -->
-        <div class="current-status">
-            <span class="status-label-text">Status Saat Ini:</span>
-            <span class="status-badge {{ $member->status }}">
-                @if($member->status == 'pending' || $member->status == 'checking')
-                    <span class="status-dot pending"></span> Menunggu Pengecekan
-                @elseif($member->status == 'validated')
-                    <span class="status-dot validated"></span> Telah Divalidasi
-                @elseif($member->status == 'printed')
-                    <span class="status-dot printed"></span> Selesai Dicetak
-                @endif
-            </span>
-        </div>
-    </div>
 
     <!-- Progress Bar Section -->
     <div class="status-card-main progress-section">
@@ -94,34 +73,28 @@
         </div>
     </div>
 
-    
+    <div class="status-container">
+    <!-- Header Section -->
+    <div class="status-card-main">
+        <div class="status-header">
+            <h1 class="status-title">Status Pengajuan Pendaftaran</h1>
+            <p class="status-subtitle">Pantau progres pengajuan keanggotaan Anda di sini</p>
+        </div>
 
-    <!-- Additional Info -->
-    @if($member->status == 'checking' || $member->status == 'pending')
-        <div class="alert-info">
-            <span class="alert-icon">ℹ</span>
-            <div class="alert-content">
-                <h5>Informasi:</h5>
-                <p>Pengajuan Anda sedang diproses. Kami akan memberikan notifikasi saat ada perkembangan terbaru.</p>
-            </div>
+        <!-- Current Status Display -->
+        <div class="current-status">
+            <span class="status-label-text">Status Saat Ini:</span>
+            <span class="status-badge {{ $member->status }}">
+                @if($member->status == 'pending' || $member->status == 'checking')
+                    <span class="status-dot pending"></span> Berkas sedang dalam pengecekan oleh petugas perpustakaan, tunggu hingga berkas divalidasi
+                @elseif($member->status == 'validated')
+                    <span class="status-dot validated"></span> Berkas telah divalidasi, datang ke perpustakaan untuk pencetakan kartu dengan membawa berkas yang sudah dicetak beserta KTP (asli atau fotokopi).
+                @elseif($member->status == 'printed')
+                    <span class="status-dot printed"></span> Kartu anggota telah dicetak, selamat bergabung menjadi anggota Perpustakaan Monumen Pers Nasional!
+                @endif
+            </span>
         </div>
-    @elseif($member->status == 'validated')
-        <div class="alert-warning">
-            <span class="alert-icon">⚠</span>
-            <div class="alert-content">
-                <h5>Pemberitahuan:</h5>
-                <p>Berkas Anda telah lolos validasi. Kartu Anda sedang dalam proses pencetakan.</p>
-            </div>
-        </div>
-    @elseif($member->status == 'printed')
-        <div class="alert-success">
-            <span class="alert-icon">✓</span>
-            <div class="alert-content">
-                <h5>Selamat!</h5>
-                <p>Kartu anggota Anda sudah siap. Silakan ambil di meja administrasi perpustakaan.</p>
-            </div>
-        </div>
-    @endif
+    </div>
 </div>
 
 @endsection

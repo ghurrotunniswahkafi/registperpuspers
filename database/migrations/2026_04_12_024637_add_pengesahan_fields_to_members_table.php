@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('members', function (Blueprint $table) {
             $table->string('pengesahan_nama')->nullable();
             $table->string('pengesahan_jabatan')->nullable();
-            $table->string('pengesahan_no_hp')->nullable();
             $table->boolean('pengesahan_kenal')->default(false);
         });
     }
@@ -25,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn(['pengesahan_nama', 'pengesahan_jabatan', 'pengesahan_no_hp', 'pengesahan_kenal']);
+            $table->dropColumn(['pengesahan_nama', 'pengesahan_jabatan', 'pengesahan_kenal']);
         });
     }
 };
