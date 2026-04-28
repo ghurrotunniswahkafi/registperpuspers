@@ -1,27 +1,71 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Lupa Password</title>
+
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-content">
+        <img src="{{ asset('image/logo.png') }}" class="header-logo">
+        <div class="header-text">
+            <h1>PERPUSTAKAAN</h1>
+            <p>MONUMEN PERS NASIONAL</p>
+        </div>
     </div>
+</div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
+<!-- CONTAINER -->
+<div class="login-container">
+    <div class="login-form" style="max-width: 520px; width: 100%; margin: auto; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 40px;">
 
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- TITLE -->
+        <div class="form-header">
+            <h2 style="color:#0066cc;">Lupa Password</h2>
+            <p>Masukkan email untuk mendapatkan link reset password</p>
         </div>
 
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        <!-- STATUS SUCCESS -->
+        @if (session('status'))
+            <div class="success-message" style="background:#d4edda; color:#155724; padding:10px; border-radius:8px; margin-bottom:15px;">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <!-- ERROR -->
+        @if ($errors->any())
+            <div class="error-message">
+                {{ $errors->first('email') }}
+            </div>
+        @endif
+
+        <!-- FORM -->
+        <form method="POST" action="{{ route('password.email') }}">
+            @csrf
+
+            <div class="form-group">
+                <label>Email</label>
+                <input 
+                    type="email" 
+                    name="email"
+                    value="{{ old('email') }}"
+                    placeholder="Masukkan email Anda"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <button type="submit" class="btn-login">
+                Kirim Link Reset Password
+            </button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

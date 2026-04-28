@@ -93,7 +93,7 @@
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email">Alamat Email</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="nama@email.com">
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="you@example.com">
                     </div>
 
                     <!-- Password -->

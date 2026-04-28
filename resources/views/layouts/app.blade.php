@@ -38,7 +38,7 @@
                 <div style="display: flex; align-items: center; gap: 10px; padding: 0 15px;">
                     <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: inline-block; margin: 0;">
                         @csrf
-                        <button type="submit" class="logout-btn" style="background-color: ##004391; border: none; cursor: pointer; padding: 10px 20px; font-size: 14px; color: #ffffff; font-weight: 600; border-radius: 5px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#004391'" onmouseout="this.style.backgroundColor='#2a15c7'">
+                        <button type="submit" class="logout-btn" style="background-color: ##004391; border: none; cursor: pointer; padding: 10px 20px; font-size: 14px; color: #2e62ff; font-weight: 600; border-radius: 5px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#004391'" onmouseout="this.style.backgroundColor='#2a15c7'">
                             <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> LOGOUT
                         </button>
                     </form>

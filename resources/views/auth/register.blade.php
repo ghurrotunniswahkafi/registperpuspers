@@ -143,7 +143,7 @@
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email">Alamat Email</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="username" placeholder="nama@email.com">
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="username" placeholder="you@example.com">
                         @if ($errors->has('email'))
                             <span class="form-error">{{ $errors->first('email') }}</span>
                         @endif
