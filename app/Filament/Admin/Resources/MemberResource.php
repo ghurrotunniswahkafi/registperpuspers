@@ -42,21 +42,18 @@ class MemberResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make()
+           ->actions([
+                Tables\Actions\Action::make('view')
+                    ->label('Lihat')
+                    ->icon('heroicon-o-eye')
+                    ->url(fn ($record) => static::getUrl('view', ['record' => $record]))
                     ->visible($user->isPetinggi()),
-                
+
                 Tables\Actions\EditAction::make()
                     ->visible($user->isAdmin()),
-                
+
                 Tables\Actions\DeleteAction::make()
                     ->visible($user->isAdmin()),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->visible($user->isAdmin()),
-                ]),
             ]);
     }
 
