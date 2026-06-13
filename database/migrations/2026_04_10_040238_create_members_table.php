@@ -14,7 +14,6 @@ return new class extends Migration
     Schema::create('members', function (Blueprint $table) {
         $table->id();
         $table->string('nama');
-        $table->string('no_identitas');
         $table->string('asal_alamat');
         $table->string('tempat');
         $table->date('tanggal_lahir');
@@ -26,7 +25,6 @@ return new class extends Migration
         $table->text('alamat_instansi')->nullable();
 
         $table->string('foto')->nullable();
-        $table->string('ktp')->nullable();
 
         $table->string('status')->default('pending'); // pending, validasi, selesai
 

@@ -1,75 +1,93 @@
 @extends('layouts.app')
 
+@section('title', 'Profil Diri')
+
 @section('content')
+<div class="member-profile-page">
+    <section class="member-profile-card">
+        <header class="member-profile-header">
+            <div class="member-profile-photo">
+                @if($member->foto)
+                    <img src="{{ asset('storage/' . $member->foto) }}" alt="Foto {{ $member->nama }}">
+                @else
+                    <i class="fa-solid fa-user"></i>
+                @endif
+            </div>
 
-<div class="card profile-box">
-    <h2>PROFIL DIRI</h2>
+            <div class="member-profile-identity">
+                <p class="member-profile-eyebrow">Profil Anggota</p>
+                <h1>{{ $member->nama }}</h1>
+                <p>{{ $member->email }}</p>
+            </div>
 
-    <div class="form-row">
-        <div class="form-group full">
-            <label>Nama Lengkap</label>
-            <input class="input" value="{{ $member->nama }}" disabled>
-        </div>
-    </div>
+            <span class="member-profile-status {{ $member->status }}">
+                <i class="fa-solid {{ $member->status === 'selesai' ? 'fa-circle-check' : 'fa-clock' }}"></i>
+                {{ $member->status === 'selesai' ? 'Terverifikasi' : 'Dalam Proses' }}
+            </span>
+        </header>
 
-    <div class="form-row">
-        <div class="form-group">
-            <label>No. KTP / SIM / NIM / dsb</label>
-            <input class="input" value="{{ $member->no_identitas }}" disabled>
+        <div class="profile-readonly-note">
+            <i class="fa-solid fa-lock"></i>
+            <span>Data profil ditampilkan sesuai formulir pendaftaran dan hanya dapat dibaca.</span>
         </div>
-        <div class="form-group">
-            <label>Asal Alamat KTP</label>
-            <input class="input" value="{{ $member->asal_alamat }}" disabled>
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group">
-            <label>Tempat</label>
-            <input class="input" value="{{ $member->tempat }}" disabled>
-        </div>
-        <div class="form-group">
-            <label>Tanggal Lahir</label>
-            <input class="input" value="{{ is_string($member->tanggal_lahir) ? $member->tanggal_lahir : optional($member->tanggal_lahir)->format('d/m/Y') }}" disabled>
-        </div>
-    </div>
+        <section class="profile-section">
+            <h2><i class="fa-solid fa-id-card"></i> Data Pribadi</h2>
+            <div class="profile-data-grid">
+                <div class="profile-data-item profile-data-wide">
+                    <span>Nama Lengkap</span>
+                    <strong>{{ $member->nama }}</strong>
+                </div>
+                <div class="profile-data-item">
+                    <span>Asal Alamat</span>
+                    <strong>{{ $member->asal_alamat }}</strong>
+                </div>
+                <div class="profile-data-item">
+                    <span>Tempat Lahir</span>
+                    <strong>{{ $member->tempat }}</strong>
+                </div>
+                <div class="profile-data-item">
+                    <span>Tanggal Lahir</span>
+                    <strong>{{ optional($member->tanggal_lahir)->format('d F Y') ?? '-' }}</strong>
+                </div>
+                <div class="profile-data-item profile-data-wide">
+                    <span>Alamat Rumah</span>
+                    <strong>{{ $member->alamat }}</strong>
+                </div>
+            </div>
+        </section>
 
-    <div class="form-row">
-        <div class="form-group full">
-            <label>Alamat Rumah</label>
-            <input class="input" value="{{ $member->alamat }}" disabled>
-        </div>
-    </div>
+        <section class="profile-section">
+            <h2><i class="fa-solid fa-address-book"></i> Informasi Kontak</h2>
+            <div class="profile-data-grid">
+                <div class="profile-data-item">
+                    <span>No. Telepon / HP</span>
+                    <strong>{{ $member->no_hp }}</strong>
+                </div>
+                <div class="profile-data-item">
+                    <span>Alamat Email</span>
+                    <strong>{{ $member->email }}</strong>
+                </div>
+                <div class="profile-data-item">
+                    <span>Media Sosial</span>
+                    <strong>{{ $member->sosmed ?: '-' }}</strong>
+                </div>
+            </div>
+        </section>
 
-    <div class="form-row">
-        <div class="form-group">
-            <label>No. Telepon / HP</label>
-            <input class="input" value="{{ $member->no_hp }}" disabled>
-        </div>
-        <div class="form-group">
-            <label>Alamat Email</label>
-            <input class="input" value="{{ $member->email }}" disabled>
-        </div>
-        <div class="form-group">
-            <label>Media Sosial</label>
-            <input class="input" value="{{ $member->sosmed ?? '-' }}" disabled>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group full">
-            <label>Sekolah / Kuliah / Kerja di</label>
-            <input class="input" value="{{ $member->instansi ?? '-' }}" disabled>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <div class="form-group full">
-            <label>Alamat Sekolah / Kampus / Kantor</label>
-            <input class="input" value="{{ $member->alamat_instansi ?? '-' }}" disabled>
-        </div>
-    </div>
-
+        <section class="profile-section">
+            <h2><i class="fa-solid fa-building"></i> Sekolah, Kampus, atau Pekerjaan</h2>
+            <div class="profile-data-grid">
+                <div class="profile-data-item profile-data-wide">
+                    <span>Nama Instansi</span>
+                    <strong>{{ $member->instansi ?: '-' }}</strong>
+                </div>
+                <div class="profile-data-item profile-data-wide">
+                    <span>Alamat Instansi</span>
+                    <strong>{{ $member->alamat_instansi ?: '-' }}</strong>
+                </div>
+            </div>
+        </section>
+    </section>
 </div>
-
 @endsection

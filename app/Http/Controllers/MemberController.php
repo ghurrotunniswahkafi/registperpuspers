@@ -65,7 +65,6 @@ class MemberController extends Controller
 
         $data = $request->validate([
             'nama' => 'required|string|max:255',
-            'no_identitas' => 'required|string|max:255',
             'asal_alamat' => 'required|string|max:255',
             'tempat' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date|before:today',
@@ -76,12 +75,19 @@ class MemberController extends Controller
             'instansi' => 'nullable|string|max:255',
             'alamat_instansi' => 'nullable|string',
             'foto' => 'required|image|mimes:jpg,jpeg,png|max:5120',
-            'ktp' => 'required|image|mimes:jpg,jpeg,png|max:5120',
+            'ketentuan_anggota' => 'accepted',
         ], [
             'tanggal_lahir.before' => 'Tanggal lahir harus di masa lalu, bukan masa depan.',
             'no_hp.min' => 'Nomor HP harus 12 digit.',
             'no_hp.max' => 'Nomor HP harus 12 digit.',
+            'foto.required' => 'Foto formal wajib diunggah.',
+            'foto.image' => 'File yang diunggah harus berupa gambar.',
+            'foto.mimes' => 'Format foto tidak sesuai. Gunakan file JPG, JPEG, atau PNG.',
+            'foto.max' => 'Ukuran foto terlalu besar. Maksimal ukuran file adalah 5 MB.',
+            'ketentuan_anggota.accepted' => 'Anda harus menyetujui syarat dan ketentuan anggota.',
         ]);
+
+        unset($data['ketentuan_anggota']);
 
         // Validasi tambahan untuk pengesahan jika asal_alamat = Lainnya
         if ($request->asal_alamat === 'Lainnya') {
@@ -100,7 +106,6 @@ class MemberController extends Controller
 
         // upload file
         $data['foto'] = $request->file('foto')->store('foto', 'public');
-        $data['ktp'] = $request->file('ktp')->store('ktp', 'public');
 
         // default status
         $data['status'] = 'pending';

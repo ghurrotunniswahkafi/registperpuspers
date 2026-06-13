@@ -32,8 +32,8 @@ class AuthenticatedSessionController extends Controller
         $user = auth()->user();
         
         if ($user->isAdmin() || $user->isPetinggi()) {
-            return redirect('/admin');
-        }
+            return redirect('/admin/dashboard');
+                }
         
         // calon_member redirect directly to form
         return redirect('/member/form');

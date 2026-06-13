@@ -113,10 +113,6 @@
                 <td>: {{ $member->tempat }} / {{ is_string($member->tanggal_lahir) ? $member->tanggal_lahir : optional($member->tanggal_lahir)->format('d-m-Y') }}</td>
             </tr>
             <tr>
-                <td>No. KTP / SIM / NIM / dsb</td>
-                <td>: {{ $member->no_identitas }}</td>
-            </tr>
-            <tr>
                 <td>Alamat Rumah (sesuai kartu identitas)</td>
                 <td>: {{ $member->alamat }}</td>
             </tr>

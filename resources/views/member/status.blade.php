@@ -1,100 +1,107 @@
 @extends('layouts.app')
 
+@section('title', 'Status Pengajuan')
+
 @section('content')
+@php
+    $status = $member->status;
+    $isValidation = in_array($status, ['validasi', 'selesai']);
+    $isCompleted = $status === 'selesai';
 
+    $statusTitle = match ($status) {
+        'validasi' => 'Berkas sedang divalidasi',
+        'selesai' => 'Pendaftaran telah selesai',
+        default => 'Berkas sedang dalam pengecekan',
+    };
 
+    $statusDescription = match ($status) {
+        'validasi' => 'Petugas sedang memvalidasi data dan dokumen pendaftaran Anda.',
+        'selesai' => 'Pendaftaran Anda telah disetujui. Silakan datang ke perpustakaan dengan membawa formulir yang sudah dicetak dan KTP.',
+        default => 'Berkas Anda sudah diterima dan sedang menunggu pemeriksaan oleh petugas perpustakaan.',
+    };
+@endphp
 
-    <!-- Progress Bar Section -->
+<div class="status-container member-status-page">
+    <div class="status-card-main">
+        <div class="status-header">
+            <p class="status-eyebrow">Keanggotaan Perpustakaan</p>
+            <h1 class="status-title">Status Pengajuan Pendaftaran</h1>
+            <p class="status-subtitle">
+                Halo, <strong>{{ $member->nama }}</strong>. Pantau perkembangan pengajuan keanggotaan Anda di halaman ini.
+            </p>
+        </div>
+
+        <div class="current-status">
+            <span class="status-icon {{ $isCompleted ? 'completed' : ($isValidation ? 'validation' : 'pending') }}">
+                <i class="fa-solid {{ $isCompleted ? 'fa-circle-check' : ($isValidation ? 'fa-magnifying-glass' : 'fa-clock') }}"></i>
+            </span>
+            <div class="current-status-copy">
+                <span class="status-label-text">Status Saat Ini</span>
+                <h2>{{ $statusTitle }}</h2>
+                <p>{{ $statusDescription }}</p>
+            </div>
+        </div>
+    </div>
+
     <div class="status-card-main progress-section">
-        <h3 class="section-title">Tahapan Proses</h3>
-        
+        <h2 class="section-title">Tahapan Proses</h2>
+
         <div class="progress-container">
             <div class="progress-steps">
-                <!-- Step 1: Pengecekan -->
-                <div class="progress-step 
-                    @if(in_array($member->status, ['pending','checking','validated','printed'])) active @endif
-                    @if(in_array($member->status, ['validated','printed'])) completed @endif">
+                <div class="progress-step active {{ $isValidation || $isCompleted ? 'completed' : '' }}">
                     <div class="step-circle">
                         <div class="step-number">
-                            @if(in_array($member->status, ['validated','printed']))
-                                <span class="checkmark">✓</span>
+                            @if($isValidation || $isCompleted)
+                                <i class="fa-solid fa-check checkmark"></i>
                             @else
-                                @if(in_array($member->status, ['pending','checking']))
-                                    <span class="number">1</span>
-                                @else
-                                    <span class="number">1</span>
-                                @endif
+                                <span class="number">1</span>
                             @endif
                         </div>
                     </div>
-                    <h4 class="step-title">Pengecekan Berkas</h4>
-                    <p class="step-description">Berkas diperiksa</p>
+                    <h3 class="step-title">Berkas Diterima</h3>
+                    <p class="step-description">Formulir berhasil dikirim</p>
                 </div>
 
-                <!-- Connector Line 1 -->
-                <div class="progress-connector 
-                    @if(in_array($member->status, ['validated','printed'])) active @endif">
-                </div>
+                <div class="progress-connector {{ $isValidation ? 'completed' : '' }}"></div>
 
-                <!-- Step 2: Validasi -->
-                <div class="progress-step 
-                    @if(in_array($member->status, ['validated','printed'])) active @endif
-                    @if($member->status == 'printed') completed @endif">
+                <div class="progress-step {{ $isValidation ? 'active' : '' }} {{ $isCompleted ? 'completed' : '' }}">
                     <div class="step-circle">
                         <div class="step-number">
-                            @if($member->status == 'printed')
-                                <span class="checkmark">✓</span>
+                            @if($isCompleted)
+                                <i class="fa-solid fa-check checkmark"></i>
                             @else
                                 <span class="number">2</span>
                             @endif
                         </div>
                     </div>
-                    <h4 class="step-title">Validasi</h4>
-                    <p class="step-description">Berkas divalidasi</p>
+                    <h3 class="step-title">Validasi Petugas</h3>
+                    <p class="step-description">Data dan dokumen diperiksa</p>
                 </div>
 
-                <!-- Connector Line 2 -->
-                <div class="progress-connector 
-                    @if($member->status == 'printed') active @endif">
-                </div>
+                <div class="progress-connector {{ $isCompleted ? 'completed' : '' }}"></div>
 
-                <!-- Step 3: Kartu Dicetak -->
-                <div class="progress-step 
-                    @if($member->status == 'printed') active completed @endif">
+                <div class="progress-step {{ $isCompleted ? 'active completed' : '' }}">
                     <div class="step-circle">
                         <div class="step-number">
-                            <span class="number">3</span>
+                            @if($isCompleted)
+                                <i class="fa-solid fa-check checkmark"></i>
+                            @else
+                                <span class="number">3</span>
+                            @endif
                         </div>
                     </div>
-                    <h4 class="step-title">Kartu Dicetak</h4>
-                    <p class="step-description">Kartu selesai</p>
+                    <h3 class="step-title">Selesai</h3>
+                    <p class="step-description">Pendaftaran telah disetujui</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="status-container">
-    <!-- Header Section -->
-    <div class="status-card-main">
-        <div class="status-header">
-            <h1 class="status-title">Status Pengajuan Pendaftaran</h1>
-            <p class="status-subtitle">Pantau progres pengajuan keanggotaan Anda di sini</p>
-        </div>
-
-        <!-- Current Status Display -->
-        <div class="current-status">
-            <span class="status-label-text">Status Saat Ini:</span>
-            <span class="status-badge {{ $member->status }}">
-                @if($member->status == 'pending' || $member->status == 'checking')
-                    <span class="status-dot pending"></span> Berkas sedang dalam pengecekan oleh petugas perpustakaan, tunggu hingga berkas divalidasi
-                @elseif($member->status == 'validated')
-                    <span class="status-dot validated"></span> Berkas telah divalidasi, datang ke perpustakaan untuk pencetakan kartu dengan membawa berkas yang sudah dicetak beserta KTP (asli atau fotokopi).
-                @elseif($member->status == 'printed')
-                    <span class="status-dot printed"></span> Kartu anggota telah dicetak, selamat bergabung menjadi anggota Perpustakaan Monumen Pers Nasional!
-                @endif
-            </span>
-        </div>
+    <div class="status-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>
+            Proses pemeriksaan dilakukan oleh petugas. Silakan periksa halaman ini secara berkala untuk melihat perubahan status.
+        </p>
     </div>
 </div>
-
 @endsection

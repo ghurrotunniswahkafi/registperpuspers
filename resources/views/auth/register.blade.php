@@ -15,11 +15,13 @@
     <!-- Header -->
     <div class="header">
         <div class="header-content">
-            <img src="{{ asset('image/logo.png') }}" alt="Logo" class="header-logo">
-            <div class="header-text">
-                <h1>PERPUSTAKAAN</h1>
-                <p>MONUMEN PERS NASIONAL</p>
-            </div>
+            <a href="{{ route('welcome') }}" class="header-brand-link" aria-label="Kembali ke halaman utama">
+                <img src="{{ asset('image/logo.png') }}" alt="Logo" class="header-logo">
+                <div class="header-text">
+                    <h1>PERPUSTAKAAN</h1>
+                    <p>MONUMEN PERS NASIONAL</p>
+                </div>
+            </a>
         </div>
     </div>
 
@@ -190,5 +192,17 @@
             margin-top: 5px;
         }
     </style>
+
+    <a
+        href="https://api.whatsapp.com/send/?phone=628112505959&text=Halo+Kak+Min%21+%F0%9F%91%8B+Aku+mau+tanya-tanya+soal+pendaftaran+anggota+perpustakaan+nih.+Untuk+syarat+dan+cara+daftarnya+gimana+saja+ya%2C+Kak%3F+Makasih+sebelumnya%21+%F0%9F%98%8A&type=phone_number&app_absent=0"
+        class="whatsapp-help"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Hubungi admin via WhatsApp"
+        title="Butuh bantuan? Hubungi admin via WhatsApp"
+    >
+        <i class="fab fa-whatsapp"></i>
+        <span>Butuh bantuan?</span>
+    </a>
 </body>
 </html>

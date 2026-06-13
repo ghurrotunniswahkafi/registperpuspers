@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-<link rel="icon" href="{{ asset('favicon.ico') }}">        <!-- Fonts -->
+        <title>@yield('title', config('app.name', 'Laravel'))</title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}">        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
@@ -37,7 +37,7 @@
                 <div style="display: flex; align-items: center; gap: 10px; padding: 0 15px;">
                     <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: inline-block; margin: 0;">
                         @csrf
-                        <button type="submit" class="logout-btn" style="background-color: ##004391; border: none; cursor: pointer; padding: 10px 20px; font-size: 14px; color: #2e62ff; font-weight: 600; border-radius: 5px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#004391'" onmouseout="this.style.backgroundColor='#2a15c7'">
+                        <button type="submit" class="logout-btn" style="background-color: #004391; border: none; cursor: pointer; padding: 10px 20px; font-size: 14px; color: #ffffff; font-weight: 600; border-radius: 5px; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#00336d'" onmouseout="this.style.backgroundColor='#004391'">
                             <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> LOGOUT
                         </button>
                     </form>
@@ -70,6 +70,18 @@
 
             </div>
         </div>
+
+        <a
+            href="https://api.whatsapp.com/send/?phone=628112505959&text=Halo+Kak+Min%21+%F0%9F%91%8B+Aku+mau+tanya-tanya+soal+pendaftaran+anggota+perpustakaan+nih.+Untuk+syarat+dan+cara+daftarnya+gimana+saja+ya%2C+Kak%3F+Makasih+sebelumnya%21+%F0%9F%98%8A&type=phone_number&app_absent=0"
+            class="whatsapp-help"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Hubungi admin via WhatsApp"
+            title="Butuh bantuan? Hubungi admin via WhatsApp"
+        >
+            <i class="fab fa-whatsapp"></i>
+            <span>Butuh bantuan?</span>
+        </a>
 
         <script>
             // Sidebar Toggle Functionality

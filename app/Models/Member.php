@@ -8,7 +8,8 @@ class Member extends Model
 {
    protected $fillable = [
     'nama',
-    'no_identitas',
+    'nomor_keanggotaan',
+    'jenis_keanggotaan',
     'asal_alamat',
     'tempat',
     'tanggal_lahir',
@@ -19,7 +20,6 @@ class Member extends Model
     'instansi',
     'alamat_instansi',
     'foto',
-    'ktp',
     'status',
     'pengesahan_nama',
     'pengesahan_jabatan',

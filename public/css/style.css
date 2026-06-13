@@ -230,6 +230,11 @@ body {
     margin: 20px;
 }
 
+.member-form-card {
+    width: min(100% - 40px, 980px);
+    margin: 24px auto;
+}
+
 /* INPUT */
 .input {
     width: 100%;
@@ -321,6 +326,171 @@ body {
     opacity: 0.8;
 }
 
+/* MEMBER SUBMISSION SUCCESS */
+.success-page {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 42px 24px;
+    background: #f5f6f8;
+}
+
+.success-panel {
+    width: min(100%, 680px);
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 10px 32px rgba(31, 41, 55, 0.09);
+}
+
+.success-panel .success {
+    min-height: 0;
+    padding: 48px 42px;
+}
+
+.success-panel .success .icon {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 30px;
+    font-size: 64px;
+    box-shadow: 0 8px 24px rgba(126, 211, 33, 0.2);
+}
+
+.success-panel .success-eyebrow {
+    margin: 0 0 5px;
+    color: #16803a;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.success-panel .success-message {
+    margin-bottom: 8px;
+    font-size: 46px;
+}
+
+.success-greeting {
+    margin: 0 0 12px;
+    color: #1f2937;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.success-panel .success-description {
+    width: 100%;
+    max-width: 540px;
+    margin-bottom: 15px;
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.success-panel .success-intro {
+    margin-bottom: 28px;
+}
+
+.success-steps {
+    width: 100%;
+    max-width: 540px;
+    padding: 24px;
+    border-radius: 8px;
+    background: #f7f9fc;
+    text-align: left;
+}
+
+.success-steps > h2 {
+    margin: 0 0 20px;
+    color: #1f2937;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.success-step {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 13px;
+    align-items: start;
+}
+
+.success-step + .success-step {
+    margin-top: 18px;
+}
+
+.success-step-number {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #0066cc;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.success-step h3 {
+    margin: 0 0 3px;
+    color: #283548;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.success-step p {
+    margin: 0;
+    color: #667085;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.success-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    max-width: 540px;
+    margin-top: 22px;
+}
+
+.success-action {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px 18px;
+    border: 1px solid #0066cc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.success-action:hover {
+    transform: translateY(-1px);
+}
+
+.success-action-primary {
+    background: #0066cc;
+    color: #fff;
+}
+
+.success-action-primary:hover {
+    background: #0052a3;
+    color: #fff;
+}
+
+.success-action-secondary {
+    background: #fff;
+    color: #0066cc;
+}
+
+.success-action-secondary:hover {
+    background: #eef6ff;
+    color: #0052a3;
+}
+
 /* STATUS PENGAJUAN PAGE */
 
 /* Color Variables */
@@ -339,6 +509,24 @@ body {
 .status-container {
     padding: 30px;
     background: var(--color-bg-light);
+}
+
+.member-status-page {
+    min-height: calc(100vh - 90px);
+}
+
+.member-status-page .status-card-main {
+    width: min(100%, 920px);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.status-eyebrow {
+    margin: 0 0 7px;
+    color: #0066cc;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 /* Status Card Main */
@@ -383,6 +571,49 @@ body {
     margin-bottom: 5px;
 }
 
+.status-icon {
+    display: inline-flex;
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 21px;
+}
+
+.status-icon.pending {
+    background: #fef3c7;
+    color: #a16207;
+}
+
+.status-icon.validation {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-icon.completed {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.current-status-copy {
+    min-width: 0;
+}
+
+.current-status-copy h2 {
+    margin: 3px 0 4px;
+    color: #1f2937;
+    font-size: 17px;
+}
+
+.current-status-copy p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
 .status-label-text {
     font-size: 14px;
     font-weight: 600;
@@ -412,7 +643,8 @@ body {
     color: #1e40af;
 }
 
-.status-badge.printed {
+.status-badge.printed,
+.status-badge.selesai {
     background: #dcfce7;
     color: #166534;
 }
@@ -433,7 +665,8 @@ body {
     background: #3b82f6;
 }
 
-.status-dot.printed {
+.status-dot.printed,
+.status-dot.selesai {
     background: var(--color-success-green);
 }
 
@@ -551,6 +784,42 @@ body {
 .progress-connector.active {
     background: var(--color-highlight-yellow);
     box-shadow: 0 0 6px rgba(250, 204, 21, 0.3);
+}
+
+.progress-connector.completed {
+    background: var(--color-success-green);
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.3);
+}
+
+.member-status-page .progress-section {
+    margin-top: 22px;
+}
+
+.member-status-page .section-title {
+    text-align: center;
+}
+
+.status-help {
+    display: flex;
+    width: min(100%, 920px);
+    align-items: flex-start;
+    gap: 11px;
+    margin: 0 auto;
+    padding: 16px 18px;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #1e40af;
+}
+
+.status-help i {
+    margin-top: 3px;
+}
+
+.status-help p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 /* Info Cards Section */
@@ -699,6 +968,41 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .success-page {
+        padding: 24px 14px;
+    }
+
+    .success-panel .success {
+        padding: 36px 22px;
+    }
+
+    .success-panel .success .icon {
+        width: 88px;
+        height: 88px;
+        margin-bottom: 24px;
+        font-size: 50px;
+    }
+
+    .success-panel .success-message {
+        font-size: 34px;
+    }
+
+    .success-greeting {
+        font-size: 19px;
+    }
+
+    .success-panel .success-description {
+        font-size: 13px;
+    }
+
+    .success-steps {
+        padding: 20px 16px;
+    }
+
+    .success-actions {
+        grid-template-columns: 1fr;
+    }
+
     .status-container {
         padding: 20px;
     }
@@ -724,7 +1028,167 @@ body {
 
 .profile-box input {
     background: #eee;
-}/* GRID FORM */
+}
+
+/* MEMBER PROFILE */
+.member-profile-page {
+    min-height: calc(100vh - 90px);
+    padding: 30px;
+    background: #f5f6f8;
+}
+
+.member-profile-card {
+    width: min(100%, 920px);
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.member-profile-header {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) auto;
+    gap: 22px;
+    align-items: center;
+    padding: 30px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+}
+
+.member-profile-photo {
+    display: flex;
+    width: 92px;
+    height: 112px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #eee;
+    color: #666;
+    font-size: 34px;
+}
+
+.member-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-profile-eyebrow {
+    margin: 0 0 5px;
+    color: #666;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.member-profile-identity h1 {
+    margin: 0 0 6px;
+    color: #1f2937;
+    font-size: 26px;
+    line-height: 1.25;
+}
+
+.member-profile-identity > p:last-child {
+    margin: 0;
+    color: #667085;
+    font-size: 14px;
+}
+
+.member-profile-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background: #eee;
+    color: #555;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.member-profile-status.selesai {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.profile-readonly-note {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 24px 30px 0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: #fafafa;
+    color: #667085;
+    font-size: 12px;
+}
+
+.profile-readonly-note i,
+.profile-section h2 i {
+    color: #2c4ea2;
+}
+
+.profile-section {
+    padding: 28px 30px;
+}
+
+.profile-section + .profile-section {
+    border-top: 1px solid #e5e7eb;
+}
+
+.profile-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 20px;
+    color: #283548;
+    font-size: 16px;
+}
+
+.profile-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.profile-data-item {
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #eee;
+}
+
+.profile-data-item span {
+    display: block;
+    margin-bottom: 6px;
+    color: #666;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-data-item strong {
+    display: block;
+    overflow-wrap: anywhere;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.profile-data-wide {
+    grid-column: 1 / -1;
+}
+
+/* GRID FORM */
 .form-row {
     display: flex;
     gap: 20px;
@@ -739,6 +1203,13 @@ body {
 
 .form-group.full {
     flex: 100%;
+}
+
+.pengesahan-info {
+    margin: 6px 0 20px;
+    color: #5f6670;
+    font-size: 13px;
+    line-height: 1.7;
 }
 
 /* LABEL */
@@ -760,6 +1231,109 @@ label {
 /* UPLOAD */
 .upload-section {
     margin-top: 30px;
+}
+
+.photo-example-info {
+    margin: -4px 0 14px;
+}
+
+.photo-example-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0066cc;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.photo-example-link:hover {
+    color: #0052a3;
+}
+
+.photo-example-link:focus-visible {
+    outline: 3px solid rgba(0, 102, 204, 0.2);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
+
+.photo-example-info p {
+    margin: 6px 0 0;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.photo-example-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.68);
+}
+
+.photo-example-modal.is-open {
+    display: flex;
+}
+
+.photo-example-dialog {
+    position: relative;
+    width: min(100%, 460px);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    padding: 24px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
+}
+
+.photo-example-dialog h2 {
+    margin: 0 44px 18px 0;
+    color: #1f2937;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+.photo-example-dialog img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 150px);
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.photo-example-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: #f1f3f5;
+    color: #333;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.photo-example-close:hover {
+    background: #e3e7eb;
+}
+
+body.modal-open {
+    overflow: hidden;
 }
 
 .upload-box {
@@ -808,6 +1382,109 @@ label {
     border-color: #2c4ea2;
 }
 
+/* TERMS */
+.terms-box {
+    margin-top: 18px;
+    padding: 6px 4px 2px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: #fff;
+    color: #5f6670;
+}
+
+.terms-box.terms-error {
+    border-color: #c33;
+    background: #fffafa;
+    padding: 18px 16px;
+}
+
+.terms-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 18px;
+    color: #444;
+}
+
+.terms-title-icon {
+    position: relative;
+    width: 28px;
+    height: 31px;
+    flex: 0 0 28px;
+    color: #050505;
+}
+
+.terms-title-icon .fa-file-lines {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.terms-title-icon .fa-magnifying-glass {
+    position: absolute;
+    right: -2px;
+    bottom: 0;
+    font-size: 14px;
+    color: #111;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.terms-title h3 {
+    margin: 0;
+    padding-top: 4px;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.terms-list {
+    max-width: 910px;
+    margin: 0 0 22px 78px;
+    padding-left: 18px;
+    list-style: decimal;
+    line-height: 1.92;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.terms-list li {
+    padding-left: 2px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.terms-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    max-width: 910px;
+    margin: 0 0 8px 72px;
+    line-height: 1.85;
+    color: #5f6670;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 800;
+}
+
+.terms-check input {
+    width: 13px;
+    height: 13px;
+    margin-top: 6px;
+    flex: 0 0 auto;
+    accent-color: #2c4ea2;
+}
+
+.terms-error-text {
+    display: block;
+    margin-left: 72px;
+    color: #c33;
+    font-size: 12px;
+    font-weight: 600;
+}
+
 /* LOGIN PAGE STYLES */
 .header {
     background: #ffffff;
@@ -821,6 +1498,14 @@ label {
     gap: 15px;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.header-brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    color: inherit;
+    text-decoration: none;
 }
 
 .header-logo {
@@ -1372,6 +2057,12 @@ label {
         flex: 100%;
     }
 
+    .pengesahan-info {
+        margin-bottom: 16px;
+        font-size: 12px;
+        line-height: 1.65;
+    }
+
     .form-group input,
     .form-group select {
         padding: 10px 12px;
@@ -1398,6 +2089,19 @@ label {
         margin-bottom: 10px;
     }
 
+    .photo-example-info {
+        margin-bottom: 12px;
+    }
+
+    .photo-example-info p {
+        margin-top: 6px;
+        font-size: 12px;
+    }
+
+    .photo-example-dialog {
+        padding: 20px;
+    }
+
     .upload-box {
         padding: 30px 20px;
         margin-bottom: 15px;
@@ -1415,6 +2119,58 @@ label {
 
     .upload-box small {
         font-size: 11px;
+    }
+
+    .terms-box {
+        margin-top: 16px;
+        padding: 4px 0 0;
+    }
+
+    .terms-box.terms-error {
+        padding: 14px 12px;
+    }
+
+    .terms-title {
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 14px;
+    }
+
+    .terms-title h3 {
+        padding-top: 2px;
+        font-size: 14px;
+        line-height: 1.35;
+    }
+
+    .terms-title-icon {
+        width: 24px;
+        height: 27px;
+        flex-basis: 24px;
+    }
+
+    .terms-title-icon .fa-file-lines {
+        font-size: 24px;
+    }
+
+    .terms-title-icon .fa-magnifying-glass {
+        font-size: 12px;
+    }
+
+    .terms-list {
+        margin: 0 0 18px 22px;
+        font-size: 12px;
+        line-height: 1.8;
+        text-align: left;
+    }
+
+    .terms-check {
+        margin-left: 0;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .terms-error-text {
+        margin-left: 0;
     }
 
     .file-name {
@@ -1440,6 +2196,46 @@ label {
         padding: 10px;
     }
 
+    .member-profile-page {
+        padding: 16px 12px;
+    }
+
+    .member-profile-header {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 15px;
+        padding: 22px 18px;
+    }
+
+    .member-profile-photo {
+        width: 76px;
+        height: 94px;
+    }
+
+    .member-profile-identity h1 {
+        font-size: 20px;
+    }
+
+    .member-profile-status {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+
+    .profile-readonly-note {
+        margin: 18px 18px 0;
+    }
+
+    .profile-section {
+        padding: 24px 18px;
+    }
+
+    .profile-data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-data-wide {
+        grid-column: auto;
+    }
+
     /* STATUS PAGE */
     .status-container {
         padding: 15px;
@@ -1463,7 +2259,7 @@ label {
     }
 
     .current-status {
-        flex-direction: column;
+        align-items: flex-start;
         gap: 10px;
         padding: 12px 15px;
     }
@@ -1816,4 +2612,78 @@ label {
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
+}
+
+/* Keep member form centered inside the content area */
+.main {
+    min-width: 0;
+}
+
+.member-form-card {
+    box-sizing: border-box;
+    width: min(920px, calc(100% - 48px));
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (max-width: 768px) {
+    .member-form-card {
+        width: calc(100% - 24px);
+    }
+}
+
+.whatsapp-help {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 997;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 54px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: #25d366;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 12px 28px rgba(37, 211, 102, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.whatsapp-help i {
+    font-size: 24px;
+}
+
+.whatsapp-help:hover {
+    background: #1ebe5d;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(37, 211, 102, 0.42);
+}
+
+.whatsapp-help:focus-visible {
+    outline: 3px solid rgba(37, 211, 102, 0.35);
+    outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+    .whatsapp-help {
+        right: 16px;
+        bottom: 16px;
+        width: 54px;
+        min-height: 54px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .whatsapp-help span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+    }
 }

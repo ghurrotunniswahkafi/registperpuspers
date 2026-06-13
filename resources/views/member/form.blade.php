@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'Perpustakaan MPN')
+
 @section('content')
 
-<div class="card">
+<div class="card member-form-card">
 
     <h2 style="margin-bottom:20px;"><i class="fa-solid fa-circle-user"></i> DATA CALON ANGGOTA</h2>
 
@@ -17,7 +19,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
+    <form id="member-form" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
     @csrf
 
     <!-- ROW 1 -->
@@ -33,16 +35,8 @@
 
     <!-- ROW 2 -->
     <div class="form-row">
-        <div class="form-group {{ $errors->has('no_identitas') ? 'error' : '' }}">
-            <label>No. KTP / SIM / NIM / dsb</label>
-            <input type="text" name="no_identitas" placeholder="Masukkan No. KTP / SIM / NIM / dsb" value="{{ old('no_identitas') }}" style="{{ $errors->has('no_identitas') ? 'border-color: #c33;' : '' }}">
-            @if ($errors->has('no_identitas'))
-                <small style="color: #c33;">{{ $errors->first('no_identitas') }}</small>
-            @endif
-        </div>
-
-        <div class="form-group {{ $errors->has('asal_alamat') ? 'error' : '' }}">
-            <label>Asal Alamat KTP</label>
+        <div class="form-group full {{ $errors->has('asal_alamat') ? 'error' : '' }}">
+            <label>Asal Alamat</label>
             <select name="asal_alamat" id="asal_alamat" style="{{ $errors->has('asal_alamat') ? 'border-color: #c33;' : '' }}">
                 <option value="">Pilih</option>
                 <option value="Surakarta" {{ old('asal_alamat') === 'Surakarta' ? 'selected' : '' }}>Surakarta</option>
@@ -59,7 +53,7 @@
     <!-- PENGESAHAN FORM (hidden by default) -->
     <div id="pengesahan-form" style="display: none;">
         <h3>Pengesahan</h3>
-        <p>Isikan Data Kaprodi/Kelurahan</p>
+        <p><i>Diisi oleh pihak yang mengenal atau dapat memberikan keterangan mengenai calon anggota, seperti Kaprodi/Dosen, Guru, HRD/Atasan, RT/RW, atau Kelurahan.</i></p>
         <div class="form-row">
             <div class="form-group {{ $errors->has('pengesahan_nama') ? 'error' : '' }}">
                 <label>Nama</label>
@@ -80,7 +74,7 @@
             <div class="form-group full {{ $errors->has('pengesahan_kenal') ? 'error' : '' }}">
                 <label>
                     <input type="checkbox" name="pengesahan_kenal" value="1" {{ old('pengesahan_kenal') ? 'checked' : '' }}>
-                    yang bertanda tangan mengenal saudara/i
+                    Pemberi pengesahan mengenal calon anggota dan menyatakan data yang diberikan benar.
                 </label>
                 @if ($errors->has('pengesahan_kenal'))
                     <small style="color: #c33; display: block;">{{ $errors->first('pengesahan_kenal') }}</small>
@@ -167,7 +161,14 @@
     <h3><i class="fa-solid fa-file-circle-plus"></i> UPLOAD FOTO</h3>
 
     <!-- FOTO FORMAL -->
-    <p>Foto Formal {{ $errors->has('foto') }}</p>
+    <p>Foto Diri</p>
+    <div class="photo-example-info">
+        <button type="button" class="photo-example-link" id="open-photo-example">
+            <i class="fa-regular fa-image"></i>
+            Contoh Foto Klik di Sini
+        </button>
+        <p>Gunakan Foto Dengan Posisi Seperti Di Contoh Untuk Mendapatkan Hasil Yang Maksimal</p>
+    </div>
     @if ($errors->has('foto'))
         <div style="background-color: #fee; border: 1px solid #fcc; color: #c33; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
             <small>{{ $errors->first('foto') }}</small>
@@ -181,24 +182,35 @@
         <small>Ukuran Foto 2x3</small>
         <small>JPG, PNG, JPEG (max. 5MB)</small>
         <p class="file-name" id="foto-name"></p>
-        <input type="file" name="foto" id="foto">
+        <input type="file" name="foto" id="foto" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
     </div>
 
-    <!-- FOTO KTP -->
-    <p>Foto KTP {{ $errors->has('ktp')}}</p>
-    @if ($errors->has('ktp'))
-        <div style="background-color: #fee; border: 1px solid #fcc; color: #c33; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-            <small>{{ $errors->first('ktp') }}</small>
+    <!-- SYARAT DAN KETENTUAN -->
+    <div class="terms-box {{ $errors->has('ketentuan_anggota') ? 'terms-error' : '' }}">
+        <div class="terms-title">
+            <span class="terms-title-icon" aria-hidden="true">
+                <i class="fa-solid fa-file-lines"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <h3>SYARAT DAN KETENTUAN ANGGOTA</h3>
         </div>
-    @endif
-    <div class="upload-box" style="{{ $errors->has('ktp') ? 'border-color: #c33; background-color: #fee;' : '' }}">
-        <div style="text-align: center; font-size: 48px; margin-bottom: 15px; color: #000000;">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-        </div>
-        <p class="upload-text">Klik untuk upload atau drag & drop</p>
-        <small>JPG, PNG, JPEG (max. 5MB)</small>
-        <p class="file-name" id="ktp-name"></p>
-        <input type="file" name="ktp" id="ktp">
+
+        <ol class="terms-list">
+            <li>Peminjam wajib menjaga dan merawat koleksi yang dipinjam dengan baik, mengingat koleksi tersebut merupakan milik bersama yang juga dibutuhkan oleh pengguna lain.</li>
+            <li>Dilarang mengotori, melipat, maupun mencoret-coret bagian cover maupun isi koleksi yang dipinjam.</li>
+            <li>Koleksi wajib dikembalikan tepat waktu sesuai batas waktu peminjaman yang telah ditentukan. Keterlambatan pengembalian akan dikenakan sanksi sesuai ketentuan yang berlaku.</li>
+            <li>Koleksi yang dipinjam tidak diperkenankan untuk dipinjamkan kepada pihak lain. Apabila koleksi hilang, maka peminjam yang tercatat pada buku peminjaman perpustakaan dinyatakan bertanggung jawab dan wajib mengganti dengan koleksi yang sama.</li>
+            <li>Kartu perpustakaan bersifat pribadi dan tidak dapat dipinjamkan kepada orang lain.</li>
+        </ol>
+
+        <label class="terms-check">
+            <input type="checkbox" name="ketentuan_anggota" id="ketentuan_anggota" value="1" {{ old('ketentuan_anggota') ? 'checked' : '' }}>
+            <span>Saya menyatakan bahwa data yang saya isi adalah benar dan dapat dipertanggungjawabkan, serta bersedia menaati seluruh ketentuan peminjaman koleksi Perpustakaan Monumen Pers Nasional.</span>
+        </label>
+
+        @if ($errors->has('ketentuan_anggota'))
+            <small class="terms-error-text">{{ $errors->first('ketentuan_anggota') }}</small>
+        @endif
     </div>
 
 </div>
@@ -212,35 +224,96 @@
 
 </div>
 
+<div class="photo-example-modal" id="photo-example-modal" aria-hidden="true">
+    <div class="photo-example-dialog" role="dialog" aria-modal="true" aria-labelledby="photo-example-title">
+        <button type="button" class="photo-example-close" id="close-photo-example" aria-label="Tutup contoh foto">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 id="photo-example-title">Contoh Foto Formal</h2>
+        <img src="{{ asset('image/idcard.png') }}" alt="Contoh pose foto formal setengah badan">
+    </div>
+</div>
+
 @endsection
 @if(!$errors->any())
 <script>
 localStorage.removeItem('uploaded_foto');
-localStorage.removeItem('uploaded_ktp');
 </script>
 @endif
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
+    const form = document.getElementById('member-form');
     const submitBtn = document.getElementById('submit-btn');
+    const photoExampleModal = document.getElementById('photo-example-modal');
+    const openPhotoExample = document.getElementById('open-photo-example');
+    const closePhotoExample = document.getElementById('close-photo-example');
+
+    function showPhotoExample() {
+        if (!photoExampleModal) {
+            return;
+        }
+
+        photoExampleModal.classList.add('is-open');
+        photoExampleModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        closePhotoExample?.focus();
+    }
+
+    function hidePhotoExample() {
+        if (!photoExampleModal) {
+            return;
+        }
+
+        photoExampleModal.classList.remove('is-open');
+        photoExampleModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        openPhotoExample?.focus();
+    }
+
+    openPhotoExample?.addEventListener('click', showPhotoExample);
+    closePhotoExample?.addEventListener('click', hidePhotoExample);
+
+    photoExampleModal?.addEventListener('click', function(e) {
+        if (e.target === photoExampleModal) {
+            hidePhotoExample();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && photoExampleModal?.classList.contains('is-open')) {
+            hidePhotoExample();
+        }
+    });
     
     // Validasi form sebelum submit
     if (form && submitBtn) {
         form.addEventListener('submit', function(e) {
             // Validasi input file
             const fotoInput = document.getElementById('foto');
-            const ktpInput = document.getElementById('ktp');
             
-            if (!fotoInput.files.length || !ktpInput.files.length) {
+            if (!fotoInput.files.length) {
                 e.preventDefault();
-                alert('Silakan upload kedua foto (Formal dan KTP)');
+                alert('Silakan upload foto formal.');
                 return false;
             }
-            
+
+            if (!validatePhotoFile(fotoInput.files[0], true)) {
+                e.preventDefault();
+                clearInvalidPhoto(fotoInput, document.getElementById('foto-name'));
+                return false;
+            }
+
+            const termsInput = document.getElementById('ketentuan_anggota');
+            if (termsInput && !termsInput.checked) {
+                e.preventDefault();
+                alert('Silakan centang persetujuan syarat dan ketentuan anggota.');
+                termsInput.focus();
+                return false;
+            }
+
             // Clear localStorage setelah submit berhasil (akan di-clear ketika form valid)
             // Tapi karena kita tidak tahu apakah berhasil, kita clear ketika submit
             localStorage.removeItem('uploaded_foto');
-            localStorage.removeItem('uploaded_ktp');
             
             // Disable button hanya setelah validasi berhasil
             submitBtn.disabled = true;
@@ -250,11 +323,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function validatePhotoFile(file, showAlert = false) {
+        if (!file) {
+            return false;
+        }
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png'];
+        const allowedMimeTypes = ['image/jpeg', 'image/png'];
+        const extension = file.name.split('.').pop()?.toLowerCase() ?? '';
+        const maxSize = 5 * 1024 * 1024;
+
+        if (!allowedExtensions.includes(extension) || !allowedMimeTypes.includes(file.type)) {
+            if (showAlert) {
+                alert('Format foto tidak sesuai. Gunakan file JPG, JPEG, atau PNG.');
+            }
+            return false;
+        }
+
+        if (file.size > maxSize) {
+            if (showAlert) {
+                alert('Ukuran foto terlalu besar. Maksimal ukuran file adalah 5 MB.');
+            }
+            return false;
+        }
+
+        return true;
+    }
+
+    function clearInvalidPhoto(input, displayElement) {
+        input.value = '';
+        displayElement.innerText = '';
+        displayElement.style.color = '';
+        displayElement.style.fontWeight = '';
+        localStorage.removeItem('uploaded_foto');
+    }
+
     // Function to handle file input change
     function handleFileChange(input, displayElement) {
         input.addEventListener('change', function() {
-            const fileName = this.files[0]?.name;
-            displayElement.innerText = fileName ?? '';
+            const file = this.files[0];
+
+            if (!file) {
+                displayElement.innerText = '';
+                return;
+            }
+
+            if (!validatePhotoFile(file, true)) {
+                clearInvalidPhoto(this, displayElement);
+                return;
+            }
+
+            displayElement.innerText = file.name;
         });
     }
 
@@ -314,15 +433,6 @@ document.addEventListener('DOMContentLoaded', function() {
         handleDragDrop(fotoBox, fotoInput, fotoDisplay);
     }
 
-    // Foto KTP
-    const ktpInput = document.getElementById('ktp');
-    const ktpDisplay = document.getElementById('ktp-name');
-    const ktpBox = ktpInput ? ktpInput.closest('.upload-box') : null;
-    if (ktpInput && ktpDisplay && ktpBox) {
-        handleFileChange(ktpInput, ktpDisplay);
-        handleDragDrop(ktpBox, ktpInput, ktpDisplay);
-    }
-
     // Validasi Tanggal Lahir - hanya tanggal masa lalu
     const tanggalLahirInput = document.getElementById('tanggal_lahir');
     if (tanggalLahirInput) {
@@ -360,7 +470,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     size: file.size,
                     data: base64
                 }));
-                console.log('File saved to localStorage:', key, file.name);
             };
             reader.readAsDataURL(file);
         }
@@ -385,11 +494,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const fileData = JSON.parse(stored);
                 const blob = base64ToBlob(fileData.data, fileData.type);
                 const file = new File([blob], fileData.name, { type: fileData.type });
+
+                if (!validatePhotoFile(file)) {
+                    localStorage.removeItem(key);
+                    return;
+                }
+                
+                // Create DataTransfer and set files properly
                 const dt = new DataTransfer();
                 dt.items.add(file);
                 input.files = dt.files;
+                
+                // Manually trigger change event and update display
                 displayElement.innerText = fileData.name;
-                console.log('File restored from localStorage:', key, fileData.name);
+                
+                // Add visual indicator that file is restored
+                displayElement.style.color = 'green';
+                displayElement.style.fontWeight = 'bold';
+                
             } catch (e) {
                 console.error('Error restoring file:', e);
             }
@@ -399,27 +521,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle file input changes and save to localStorage
     if (fotoInput) {
         fotoInput.addEventListener('change', function() {
+            if (!this.files[0] || !validatePhotoFile(this.files[0])) {
+                return;
+            }
+
             saveFileToLocalStorage(this, 'uploaded_foto');
-            const fileName = this.files[0]?.name;
-            fotoDisplay.innerText = fileName ?? '';
+            fotoDisplay.innerText = this.files[0].name;
         });
     }
 
-    if (ktpInput) {
-        ktpInput.addEventListener('change', function() {
-            saveFileToLocalStorage(this, 'uploaded_ktp');
-            const fileName = this.files[0]?.name;
-            ktpDisplay.innerText = fileName ?? '';
-        });
-    }
-
-    // Restore files on page load if there are errors for foto or ktp
+    // Restore files on page load if there are errors for foto
     if (fotoInput && fotoDisplay) {
         restoreFileFromLocalStorage(fotoInput, 'uploaded_foto', fotoDisplay);
-    }
-
-    if (ktpInput && ktpDisplay) {
-        restoreFileFromLocalStorage(ktpInput, 'uploaded_ktp', ktpDisplay);
     }
 });
 </script>
